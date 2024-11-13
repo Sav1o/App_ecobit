@@ -1,13 +1,14 @@
 package br.com.fatec.ecobit;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 
 public class EmailContactActivity extends AppCompatActivity {
 
@@ -31,8 +32,9 @@ public class EmailContactActivity extends AppCompatActivity {
                 String subject = edtSubject.getText().toString().trim();
                 String message = edtMessage.getText().toString().trim();
 
-                Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
-                emailIntent.setData(Uri.parse("mailto:" + toEmail));
+                Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                emailIntent.setType("message/rfc822");
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{toEmail});
                 emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
                 emailIntent.putExtra(Intent.EXTRA_TEXT, message);
 
